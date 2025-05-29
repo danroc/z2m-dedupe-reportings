@@ -20,7 +20,7 @@ Zigbee2MQTT database.
 3. Run the dedupe tool
 
     ```bash
-    python3 dedupe_reportings.py database.db.bak -o database.db
+    python3 dedupe.py database.db.bak -o database.db
     ```
 
 4. Start Zigbee2MQTT
