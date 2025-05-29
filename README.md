@@ -5,26 +5,32 @@ Zigbee2MQTT database.
 
 ## Usage
 
-1. Stop Zigbee2MQTT
+1. Download the script:
+
+   ```bash
+   wget https://raw.githubusercontent.com/danroc/z2m-dedupe-reportings/refs/heads/main/dedupe.py
+   ```
+
+2. Stop Zigbee2MQTT
 
    ```bash
    docker stop zigbee2mqtt
    ```
 
-2. Backup the database
+3. Backup the database
 
-    ```bash
-    cp database.db database.db.bak
-    ```
+   ```bash
+   cp database.db database.db.bak
+   ```
 
-3. Run the dedupe tool
+4. Run the dedupe tool
 
-    ```bash
-    python3 dedupe.py database.db.bak -o database.db
-    ```
+   ```bash
+   python3 dedupe.py database.db.bak -o database.db
+   ```
 
-4. Start Zigbee2MQTT
+5. Start Zigbee2MQTT
 
-    ```bash
-    docker start zigbee2mqtt
-    ```
+   ```bash
+   docker start zigbee2mqtt
+   ```
