@@ -3,6 +3,13 @@ import json
 from typing import Any
 
 
+KEY_ATTR_ID = "attrId"
+KEY_CLUSTER = "cluster"
+KEY_CONFIGURED_REPORTINGS = "configuredReportings"
+KEY_ENDPOINTS = "endpoints"
+KEY_MANUFACTURER_CODE = "manufacturerCode"
+
+
 def unique_by_keys(
     items: list[dict[str, Any]], keys: list[str]
 ) -> list[dict[str, Any]]:
@@ -24,13 +31,6 @@ def remove_key_if_none(item: dict[str, Any], key: str) -> dict[str, Any]:
 
 def dump_json(obj: Any) -> str:
     return json.dumps(obj, ensure_ascii=False, separators=(",", ":"))
-
-
-KEY_ATTR_ID = "attrId"
-KEY_CLUSTER = "cluster"
-KEY_CONFIGURED_REPORTINGS = "configuredReportings"
-KEY_ENDPOINTS = "endpoints"
-KEY_MANUFACTURER_CODE = "manufacturerCode"
 
 
 def dedupe_reportings(line: str) -> str:
