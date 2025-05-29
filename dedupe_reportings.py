@@ -1,8 +1,11 @@
 import argparse
 import json
+from typing import Any
 
 
-def unique_by_keys(items, keys):
+def unique_by_keys(
+    items: list[dict[str, Any]], keys: list[str]
+) -> list[dict[str, Any]]:
     seen = set()
     unique = []
     for item in items:
@@ -13,13 +16,13 @@ def unique_by_keys(items, keys):
     return unique
 
 
-def remove_key_if_none(item, key):
+def remove_key_if_none(item: dict[str, Any], key: str) -> dict[str, Any]:
     if key in item and item[key] is None:
         del item[key]
     return item
 
 
-def dump_json(obj):
+def dump_json(obj: Any) -> str:
     return json.dumps(obj, ensure_ascii=False, separators=(",", ":"))
 
 
@@ -30,8 +33,8 @@ KEY_ENDPOINTS = "endpoints"
 KEY_MANUFACTURER_CODE = "manufacturerCode"
 
 
-def dedupe_reportings(line):
-    obj = json.loads(line)
+def dedupe_reportings(line: str) -> str:
+    obj: dict[str, Any] = json.loads(line)
     for endpoint in obj.get(KEY_ENDPOINTS, {}).values():
         reportings = endpoint.get(KEY_CONFIGURED_REPORTINGS)
         if reportings:
@@ -46,11 +49,11 @@ def dedupe_reportings(line):
     return dump_json(obj)
 
 
-def join_lines(lines, newline=True):
+def join_lines(lines: list[str], newline: bool = True) -> str:
     return "\n".join(lines) + ("\n" if newline else "")
 
 
-def main(input_file, output_file=None):
+def main(input_file: str, output_file: str | None = None) -> None:
     with open(input_file, "r") as db:
         lines = [dedupe_reportings(line) for line in db]
 
